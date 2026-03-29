@@ -14,6 +14,12 @@ const { authenticateToken } = require('./middleware/auth');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Garante que a pasta logs existe
+const logsDir = path.join(__dirname, '../logs');
+if (!fs.existsSync(logsDir)) {
+  fs.mkdirSync(logsDir, { recursive: true });
+}
+
 // Logs de acesso em arquivo
 const accessLogStream = fs.createWriteStream(
   path.join(__dirname, '../logs/access.log'),

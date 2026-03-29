@@ -1,21 +1,25 @@
 // Simulação de banco de dados em memória
 // Em produção, substituir pelo serviço gerenciado (Supabase, MongoDB Atlas, etc.)
 
+const bcrypt = require('bcryptjs');
+
+// Gera hashes na inicialização para garantir compatibilidade
+const adminHash = bcrypt.hashSync('admin123', 10);
+const userHash = bcrypt.hashSync('user123', 10);
+
 let users = [
   {
     id: 1,
     name: 'Admin',
     email: 'admin@catalogo.com',
-    // senha: admin123 (bcrypt hash)
-    password: '$2a$10$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LPZuloRPdqK',
+    password: adminHash,
     role: 'admin'
   },
   {
     id: 2,
     name: 'Usuário Teste',
     email: 'user@catalogo.com',
-    // senha: user123 (bcrypt hash)
-    password: '$2a$10$wHLWijGgLl7q5UNkiFjCku7BHuQBkY0HVoCLyPiTa3OWxT5gGQfWO',
+    password: userHash,
     role: 'user'
   }
 ];
