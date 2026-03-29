@@ -93,14 +93,14 @@ jobs:
 
       # Deploy do Backend no Render
       - name: Deploy Backend (Render)
-        if: ${{ secrets.RENDER_DEPLOY_HOOK != '' }}
+        if: ${{ secrets.RENDER_DEPLOY_HOOK != null }}
         run: |
           curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
           echo "Deploy do backend disparado no Render"
 
       # Deploy do Frontend no Vercel
       - name: Deploy Frontend (Vercel)
-        if: ${{ secrets.VERCEL_TOKEN != '' }}
+        if: ${{ secrets.VERCEL_TOKEN != null }}
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
